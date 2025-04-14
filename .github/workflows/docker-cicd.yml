@@ -1,0 +1,37 @@
+name: Docker CI/CD Pipeline for Enhanced Multi-Tier Cloud Simulation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Build the Docker image
+      - name: Build Docker Image
+        run: docker build -t cloudsim-simulation .
+
+      # Step 3: Run the Docker container
+      - name: Run Simulation
+        run: docker run --rm cloudsim-simulation
+
+      # Step 4: Save visualization results as an artifact
+      - name: Save Visualization Results
+        run: |
+          mkdir -p output
+          docker cp $(docker create --rm cloudsim-simulation):/app/modules/cloudsim-examples/cloudlet_execution_results.png output/
+      - name: Upload Visualization Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: cloudlet-execution-results
+          path: output/cloudlet_execution_results.png
