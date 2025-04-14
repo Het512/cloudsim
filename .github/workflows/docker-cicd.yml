@@ -31,7 +31,7 @@ jobs:
           mkdir -p output
           docker cp $(docker create --rm cloudsim-simulation):/app/modules/cloudsim-examples/cloudlet_execution_results.png output/
       - name: Upload Visualization Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cloudlet-execution-results
           path: output/cloudlet_execution_results.png
