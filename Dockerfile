@@ -4,6 +4,11 @@ FROM openjdk:23
 # Set the working directory inside the container
 WORKDIR /app
 
+# Install Maven
+RUN apt-get update && \
+    apt-get install -y maven && \
+    apt-get clean
+
 # Copy the project files into the container
 COPY . .
 
