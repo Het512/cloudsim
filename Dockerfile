@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 
 # Install Java and Maven
 RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk maven && \
+    apt-get install -y openjdk-21-jdk maven && \
     apt-get clean
 
 # Set the working directory inside the container
