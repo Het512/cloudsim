@@ -6,8 +6,7 @@ WORKDIR /app
 
 # Install Maven
 RUN apt-get update && \
-    apt-get install -y maven && \
-    apt-get clean
+    apt-get install -y mave
 
 # Copy the project files into the container
 COPY . .
